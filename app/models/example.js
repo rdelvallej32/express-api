@@ -7,8 +7,13 @@ const exampleSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  ///underscore makes sure it is a private variable so that it is not modified
+  ///it also means we are not explicitly setting it or assigning it. It is also
+  //saying that you do not need _owner in order to create an example
   _owner: {
+    /// type is the object id
     type: mongoose.Schema.Types.ObjectId,
+    /// references User
     ref: 'User',
     required: true,
   },
@@ -18,6 +23,7 @@ const exampleSchema = new mongoose.Schema({
 });
 
 exampleSchema.virtual('length').get(function length() {
+  ///no fat arrow because of 'this'
   return this.text.length;
 });
 
